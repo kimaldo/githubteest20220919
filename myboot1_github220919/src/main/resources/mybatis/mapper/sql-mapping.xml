@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board.spring.mybatis.MemberDAO" >
+	
+	<select id="getList" resultType="memberdto" >
+		select * from member  
+	</select>
+
+	<select id="getCount" resultType="int">
+		select count(*) from member   
+	</select>
+
+<!-- member 테이블에서 id 'id_spring1' 1개 있다 
+sessesion.selectOne("onemember" , "id_spring1");
+
+member 테이블에서 id 'id_spring1' 1~n개 있다 
+sessesion.selectList("onemember" , "id_spring1");
+-->
+<select id="oneMember" resultType="memberdto" parameterType="String" >
+    select * from member where id=#{a}
+</select>
+
+<!--  int[] a = {0, 5} -->
+<select id="pagingList" resultType="memberdto"  >
+	select * from member order by regdate limit 
+	<foreach collection="array" item="num" separator=",">
+		#{num}
+	</foreach>
+</select>
+
+<!-- 
+MemberMain 
+1>MemberDTO dto = new MemberDTO();
+dto.setId("");
+dto.setPassword(숫자);
+dto.setName("");
+dto.setPhone("");
+dto.setEmail("");
+2>service.registerMember(dto) 전달 호출
+
+3>service.registerMember(MemberDTO dto){  정의
+   List<MemberDTO> list = dao.oneMember(dto.getId());
+   if( linst == null || list.size() == 0) {
+   dao.insertMember(dto);
+   }
+   
+4> dao.insertMember(MemberDTO dto){ 정의
+  session.insert("insertmember", dto)
+  }  
+}
+-->
+<insert id="insertMember" parameterType="memberdto" >
+	insert into member values(#{id},#{password},#{name},#{phone},#{email},now()) 
+</insert>
+
+<!-- 
+MemberDTO dto = new MemberDTO();
+dto.setId("")
+dto.setName("")
+dto.setPhone("")
+dto.setEmail("")
+session.update("updatemember", dto); -->
+<update id="updateMember" parameterType="memberdto" >
+	update member set name=#{name}, phone=#{phone}, email=#{email} where id=#{id}
+</update>
+
+
+<delete id="deleteMember" parameterType="String">
+	delete from member where id=#{i}
+</delete>
+<!--
+<delete id="deletemember" parameterType="memberdto">
+delete from member id=#{} and password=#{}
+</delete>
+-->
+<select id="searchList" resultType="memberdto" parameterType="memberdto">
+	select * from member where
+	<choose>
+	<when test="name != null">
+	 name like concat('%',#{name},'%')        
+	</when>
+	<when test="email != null">
+	 email like concat('%',#{email},'%')
+	</when>
+	<when test="phone != null">
+	 phone like concat('%',#{phone},'%')
+	</when>
+	<when test="id != null">
+	 id like concat('%',#{id},'%')
+	</when>
+</choose>
+	order by id
+</select>
+
+</mapper>
+

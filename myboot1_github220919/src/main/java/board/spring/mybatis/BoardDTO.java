@@ -1,0 +1,53 @@
+package board.spring.mybatis;
+
+public class BoardDTO {
+	int seq;
+	String title, contents, writer;
+	int pw, viewcount;
+	String writingtime;
+	//BoardDTO 매개변수 정의 생성자 선택적 추가
+	//toString 
+	public int getSeq() {
+		return seq;
+	}
+	public void setSeq(int seq) {// board 테이블 seq auto_increment
+		this.seq = seq;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContents() {
+		return contents;
+	}
+	public void setContents(String contents) {
+		this.contents = contents;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public int getPw() {
+		return pw;
+	}
+	public void setPw(int pw) {
+		this.pw = pw;
+	}
+	public int getViewcount() {
+		return viewcount;
+	}
+	public void setViewcount(int viewcount) {
+		this.viewcount = viewcount;
+	}
+	public String getWritingtime() {
+		return writingtime;
+	}
+	public void setWritingtime(String writingtime) {
+		this.writingtime = writingtime;
+	}
+	
+}

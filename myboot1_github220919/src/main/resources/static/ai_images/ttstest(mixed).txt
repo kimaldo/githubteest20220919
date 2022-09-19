@@ -1,0 +1,2 @@
+CLOVA Speech Recognition REST API (이하 CSR REST API)는 HTTP 기반의 REST API로 제공하는 음성인식 API로, 인식에 사용할 언어와 음성 데이터를 입력받고, 그에 맞는 인식 결과를 텍스트로 반환합니다.
+입력 음성데이터 포맷은 mp3, aac, ac3, ogg, flac, wav을 지원합니다

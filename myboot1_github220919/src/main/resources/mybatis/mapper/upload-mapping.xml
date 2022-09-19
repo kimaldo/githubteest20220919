@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="upload.UploadDAO" >
+	
+<insert id="insertUpload" parameterType="uploaddto">
+	insert into upload values(#{name}, #{description}, #{filename1}, #{filename2}, now())
+</insert>
+<select id="selectUpload" parameterType="String" resultType="uploaddto">
+	select name, description, file1 as filename1, file2 as filename2, uploadtime from upload where name=#{name}
+
+</select>
+
+</mapper>
+

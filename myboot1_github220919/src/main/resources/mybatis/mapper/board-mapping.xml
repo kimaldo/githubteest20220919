@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board.spring.mybatis.BoardDAO" >
+
+<!-- 글쓰기 -->
+<insert id="insertBoard" parameterType="boarddto">
+	insert into board(title, contents, writer, pw, viewcount, writingtime)
+	values(#{title} , #{contents}, #{writer}, #{pw}, 0, now())
+</insert>
+
+<!-- 게시물리스트 페이징처리 -->
+<select id="getTotalBoard" resultType="int" >
+	select count(*) from board
+</select>
+
+<select id="getBoardList" parameterType="int" resultType="boarddto"> 
+	select * from board order by writingtime desc limit #{limit} , 3
+</select>
+
+<!-- 상세게시물보기 -->
+<update id="updateViewcount" parameterType="int">
+	 update board set viewcount = viewcount+1 where seq=#{seq}
+</update>
+
+<select id="getDetail" resultType="boarddto" parameterType="int">
+	 select * from board where seq=#{seq}
+</select>
+
+<!-- 삭제 -->
+<delete id="deleteBoard" parameterType="int">
+	 delete from board where seq=#{seq}
+</delete>
+
+<!-- 수정 -->
+<update id="updateBoard" parameterType="boarddto" >
+	update board
+	set title = #{title} , contents=#{contents}
+	where seq=#{seq}
+</update>
+</mapper>
