@@ -26,6 +26,7 @@ public class Myboot1Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Myboot1Application.class, args);
 		System.out.println("프로젝트 팀장이 추가하는 라인");
+		System.out.println("프로젝트 팀원이 추가하는 라인");
 	}
 
 }
