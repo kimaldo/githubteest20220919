@@ -29,6 +29,7 @@ public class Myboot1Application {
 		System.out.println("프로젝트 팀원이 추가하는 라인");
 		System.out.println("프로젝트 팀원이 동시에 추가하는 라인");
 		System.out.println("프로젝트 팀장이 동시에 추가하는 라인");
+		System.out.println("프로젝트 팀장이 동시에 추가하는 라인");
 	}
 
 }
